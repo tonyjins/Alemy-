@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para mi Negrita</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700;800&display=swap');
     </style>
 
     <style>
+        /* --- ESTILOS GENERALES --- */
         body {
             margin: 0;
             padding: 0;
-            /* Fondo degradado rosado suave */
-            background: linear-gradient(135deg, #fff0f3 0%, #ffe0e9 100%);
+            background: linear-gradient(135deg, #ffecef 0%, #ffd1dc 100%);
             font-family: 'Nunito', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* PANTALLA ROJA (INICIO) */
+        /* --- PANTALLA ROJA DE INICIO --- */
         #pantalla-inicio {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -28,7 +28,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 2000;
             transition: opacity 0.8s ease-out;
         }
 
@@ -40,116 +40,171 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
-            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            font-weight: 800;
             animation: latido 1.5s infinite;
+            transition: transform 0.2s;
         }
+        #btn-comenzar:active { transform: scale(0.95); }
 
-        /* CONTENIDO PRINCIPAL */
+        /* --- CONTENIDO PRINCIPAL --- */
         #contenido-principal {
             display: none;
             padding: 20px;
             text-align: center;
             max-width: 500px;
             margin: 0 auto;
+            padding-bottom: 50px;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15);
-            border: 1px solid #ffebee;
+            padding: 30px 20px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px -10px rgba(255, 64, 129, 0.3);
+            border: 2px solid #fff;
             margin-top: 20px;
             position: relative;
             z-index: 10;
+            animation: aparecerSubiendo 1s ease-out backwards;
         }
 
         h1 { 
             color: #c2185b; 
-            font-size: 32px; 
-            margin-bottom: 15px;
-            font-family: 'Dancing Script', cursive; 
+            font-size: 36px; 
+            margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.1);
         }
 
+        /* --- CONTADOR DE TIEMPO (NUEVO) --- */
+        #contador {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .caja-tiempo {
+            background: #ffebee;
+            padding: 8px;
+            border-radius: 10px;
+            min-width: 60px;
+            border: 1px solid #ffcdd2;
+        }
+        .numero {
+            font-size: 22px;
+            font-weight: 800;
+            color: #d32f2f;
+            display: block;
+        }
+        .etiqueta {
+            font-size: 10px;
+            color: #ef5350;
+            text-transform: uppercase;
+        }
+
+        /* --- GALERÍA --- */
         .galeria {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             margin: 25px 0;
         }
 
         .foto-marco {
-            width: 125px;
-            height: 125px;
-            border-radius: 15px;
+            width: 130px;
+            height: 130px;
+            border-radius: 20px;
             border: 4px solid #fff;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
         }
-
+        .foto-marco:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 15px 30px rgba(233, 30, 99, 0.25);
+            z-index: 5;
+        }
         .foto-marco img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* --- TEXTO Y LISTA (NUEVO) --- */
         p { 
-            color: #4a4a4a; 
+            color: #555; 
             line-height: 1.7; 
-            font-size: 18px; 
+            font-size: 17px; 
             font-family: 'Nunito', sans-serif;
+            margin-bottom: 20px;
         }
         
-        .resaltado {
-             font-family: 'Dancing Script', cursive;
-             color: #c2185b;
-             font-size: 24px;
+        .lista-amor {
+            text-align: left;
+            background: #fff0f3;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px dashed #ff80ab;
+        }
+        .item-amor {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #880e4f;
+            display: flex;
+            align-items: center;
+        }
+        .item-amor:before {
+            content: "💖";
+            margin-right: 10px;
+            font-size: 18px;
         }
 
+        .resaltado { font-family: 'Dancing Script', cursive; color: #d81b60; font-size: 26px; }
         .corazon-animado {
             color: #e91e63;
-            font-size: 45px;
+            font-size: 50px;
             animation: latido 1.2s infinite;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        @keyframes latido {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .heart-rain {
-            position: fixed;
-            top: -1vh;
-            font-size: 20px;
-            user-select: none;
-            z-index: 1;
-            color: #ff4081;
-            animation: fall linear forwards;
-            text-shadow: 0 0 5px #fff;
-        }
-
+        /* --- ANIMACIONES --- */
+        @keyframes latido { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+        @keyframes aparecerSubiendo { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* LLUVIA Y CONFETI */
+        .heart-rain { position: fixed; top: -1vh; z-index: 1; animation: fall linear forwards; }
+        .confeti { position: fixed; width: 10px; height: 10px; z-index: 3000; animation: caidaConfeti 3s ease-out forwards; }
         @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
+        @keyframes caidaConfeti { 0% { transform: translateY(0) rotate(0); opacity:1;} 100% { transform: translateY(100vh) rotate(720deg); opacity:0;} }
 
-        footer { margin-top: 25px; font-size: 13px; color: #ef9a9a; text-align: center; font-weight: bold;}
+        footer { margin-top: 30px; font-size: 12px; color: #ef9a9a; font-weight: bold; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <div id="pantalla-inicio">
-        <div style="font-size:50px; margin-bottom:20px;">🎁</div>
-        <h1 style="color:white; margin-bottom:30px; font-family:'Nunito'; font-size: 24px;">Tienes una sorpresa...</h1>
-        <button id="btn-comenzar">❤️ ABRIR AHORA ❤️</button>
+        <div class="corazon-animado" style="font-size:60px; color:white;">🎁</div>
+        <h1 style="color:white; margin-bottom:30px; font-family:'Nunito'; font-size: 22px;">Tienes una sorpresa...</h1>
+        <button id="btn-comenzar">❤️ ABRIR ❤️</button>
     </div>
 
     <div id="contenido-principal">
         <div class="container">
             <div class="corazon-animado">❤️</div>
             <h1>¡Feliz 14, mi <span class="resaltado">Negrita!</span></h1>
+
+            <p style="font-size:14px; color:#ef5350; margin-bottom:5px;">Juntos desde el 15 de Dic, 2023</p>
+            <div id="contador">
+                <div class="caja-tiempo"><span class="numero" id="dias">0</span><span class="etiqueta">Días</span></div>
+                <div class="caja-tiempo"><span class="numero" id="horas">0</span><span class="etiqueta">Horas</span></div>
+                <div class="caja-tiempo"><span class="numero" id="minutos">0</span><span class="etiqueta">Min</span></div>
+                <div class="caja-tiempo"><span class="numero" id="segundos">0</span><span class="etiqueta">Seg</span></div>
+            </div>
             
             <div class="galeria">
                 <div class="foto-marco"><img src="https://i.postimg.cc/Y2Y7vTmh/1770764914359.png"></div>
@@ -159,17 +214,21 @@
             </div>
 
             <p>
-                <b>Alejandra, mi amor:</b><br><br>
-                Gracias por estos más de 2 años maravillosos. Eres mi compañera perfecta, mi alegría de todos los días y lo mejor que me ha pasado en la vida.
-                <br><br>
-                ¡Por muchos años más juntos! 
-                <br><br>
-                Te amo, <span class="resaltado">Negrita.</span>
+                <b>Alejandra, mi amor:</b><br>
+                Gracias por cada segundo a tu lado. Eres mi compañera perfecta y mi alegría de todos los días.
             </p>
+
+            <div class="lista-amor">
+                <div class="item-amor">Amo tu risa cuando te hago cosquillas</div>
+                <div class="item-amor">Amo tus enojadas</div>
+                <div class="item-amor">Amo tus locuras</div>
+                <div class="item-amor">Amo todo de ti</div>
+                <div class="item-amor"><b>Simplemente TE AMO</b></div>
+            </div>
             
-            <div style="font-size: 25px; margin-top:20px; color:#c2185b;">🌹🌹🌹</div>
+            <div style="font-size: 30px; margin-top:20px; color:#c2185b;">🌹🌹🌹</div>
         </div>
-        <footer>Hecho con mis propias manos para ti ❤️</footer>
+        <footer>HECHO CON MIS PROPIAS MANOS ❤️</footer>
     </div>
 
     <audio id="musica" loop>
@@ -177,28 +236,65 @@
     </audio>
 
     <script>
+        // --- FECHA DE INICIO: 15 DIC 2023, 8:30 PM (20:30) ---
+        const fechaInicio = new Date("December 15, 2023 20:30:00").getTime();
+
+        function actualizarContador() {
+            const ahora = new Date().getTime();
+            const diferencia = ahora - fechaInicio;
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById("dias").innerText = dias;
+            document.getElementById("horas").innerText = horas;
+            document.getElementById("minutos").innerText = minutos;
+            document.getElementById("segundos").innerText = segundos;
+        }
+        setInterval(actualizarContador, 1000); // Actualiza cada segundo
+
+        // --- BOTÓN DE INICIO Y CONFETI ---
         document.getElementById('btn-comenzar').addEventListener('click', function() {
-            // Ocultar pantalla roja
+            // Música
+            var audio = document.getElementById('musica');
+            if (audio) { audio.play().catch(e => console.log(e)); }
+            
+            // Explosión de Confeti
+            lanzarConfeti();
+
+            // Transición de pantalla
             document.getElementById('pantalla-inicio').style.opacity = '0';
             setTimeout(function(){
                 document.getElementById('pantalla-inicio').style.display = 'none';
                 document.getElementById('contenido-principal').style.display = 'block';
             }, 800);
-
-            // Reproducir música
-            var audio = document.getElementById('musica');
-            if (audio) { audio.play().catch(e => console.log(e)); }
         });
 
-        // Lluvia de corazones
+        // --- FUNCIÓN DE CONFETI ---
+        function lanzarConfeti() {
+            const colores = ['#ff4081', '#ffd700', '#00e676', '#2979ff', '#ff1744'];
+            for (let i = 0; i < 100; i++) {
+                const confeti = document.createElement('div');
+                confeti.classList.add('confeti');
+                confeti.style.left = Math.random() * 100 + 'vw';
+                confeti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+                confeti.style.animationDuration = (Math.random() * 2 + 2) + 's'; // 2 a 4 segundos
+                document.body.appendChild(confeti);
+                setTimeout(() => confeti.remove(), 4000);
+            }
+        }
+
+        // --- LLUVIA DE CORAZONES (CONSTANTE) ---
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-rain');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
             heart.style.opacity = Math.random() * 0.7 + 0.3;
-            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
             document.body.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 6000);
         }
@@ -206,4 +302,4 @@
     </script>
 
 </body>
-</html
+</html>
