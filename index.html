@@ -12,9 +12,9 @@
         body {
             margin: 0;
             padding: 0;
-            /* 2. FONDO DEGRADADO SUAVE */
+            /* Fondo degradado rosado suave */
             background: linear-gradient(135deg, #fff0f3 0%, #ffe0e9 100%);
-            font-family: 'Nunito', sans-serif; /* Fuente para el cuerpo */
+            font-family: 'Nunito', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
@@ -32,10 +32,6 @@
             transition: opacity 0.8s ease-out;
         }
 
-        #pantalla-inicio h1 {
-            font-family: 'Nunito', sans-serif;
-        }
-
         #btn-comenzar {
             padding: 15px 45px;
             font-size: 22px;
@@ -47,9 +43,7 @@
             box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
             font-weight: bold;
             animation: latido 1.5s infinite;
-            transition: transform 0.2s;
         }
-        #btn-comenzar:active { transform: scale(0.95); }
 
         /* CONTENIDO PRINCIPAL */
         #contenido-principal {
@@ -58,14 +52,158 @@
             text-align: center;
             max-width: 500px;
             margin: 0 auto;
-            animation: subirContenido 1s ease-out;
         }
-        @keyframes subirContenido { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 4. CONTENEDOR MEJORADO */
         .container {
-            background: rgba(255, 255, 255, 0.95); /* Un poco transparente */
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(233, 30, 99, 0
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15);
+            border: 1px solid #ffebee;
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 { 
+            color: #c2185b; 
+            font-size: 32px; 
+            margin-bottom: 15px;
+            font-family: 'Dancing Script', cursive; 
+        }
+
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .foto-marco {
+            width: 125px;
+            height: 125px;
+            border-radius: 15px;
+            border: 4px solid #fff;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .foto-marco img { width: 100%; height: 100%; object-fit: cover; }
+
+        p { 
+            color: #4a4a4a; 
+            line-height: 1.7; 
+            font-size: 18px; 
+            font-family: 'Nunito', sans-serif;
+        }
         
+        .resaltado {
+             font-family: 'Dancing Script', cursive;
+             color: #c2185b;
+             font-size: 24px;
+        }
+
+        .corazon-animado {
+            color: #e91e63;
+            font-size: 45px;
+            animation: latido 1.2s infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .heart-rain {
+            position: fixed;
+            top: -1vh;
+            font-size: 20px;
+            user-select: none;
+            z-index: 1;
+            color: #ff4081;
+            animation: fall linear forwards;
+            text-shadow: 0 0 5px #fff;
+        }
+
+        @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
+
+        footer { margin-top: 25px; font-size: 13px; color: #ef9a9a; text-align: center; font-weight: bold;}
+    </style>
+</head>
+<body>
+
+    <div id="pantalla-inicio">
+        <div style="font-size:50px; margin-bottom:20px;">🎁</div>
+        <h1 style="color:white; margin-bottom:30px; font-family:'Nunito'; font-size: 24px;">Tienes una sorpresa...</h1>
+        <button id="btn-comenzar">❤️ ABRIR AHORA ❤️</button>
+    </div>
+
+    <div id="contenido-principal">
+        <div class="container">
+            <div class="corazon-animado">❤️</div>
+            <h1>¡Feliz 14, mi <span class="resaltado">Negrita!</span></h1>
+            
+            <div class="galeria">
+                <div class="foto-marco"><img src="https://i.postimg.cc/Y2Y7vTmh/1770764914359.png"></div>
+                <div class="foto-marco"><img src="https://i.postimg.cc/dDJk3tzj/IMG-20251220-010032.jpg"></div>
+                <div class="foto-marco"><img src="https://i.postimg.cc/FdpK332q/Screenshot-2025-09-13-22-59-56-276-com-google-android-apps-photos.jpg"></div>
+                <div class="foto-marco"><img src="https://i.postimg.cc/Fdhk5W90/Screenshot-2026-02-10-22-12-34-849-com-google-android-apps-photos.jpg"></div>
+            </div>
+
+            <p>
+                <b>Alejandra, mi amor:</b><br><br>
+                Gracias por estos más de 2 años maravillosos. Eres mi compañera perfecta, mi alegría de todos los días y lo mejor que me ha pasado en la vida.
+                <br><br>
+                ¡Por muchos años más juntos! 
+                <br><br>
+                Te amo, <span class="resaltado">Negrita.</span>
+            </p>
+            
+            <div style="font-size: 25px; margin-top:20px; color:#c2185b;">🌹🌹🌹</div>
+        </div>
+        <footer>Hecho con mis propias manos para ti ❤️</footer>
+    </div>
+
+    <audio id="musica" loop>
+        <source src="Lasso%20-%20Hasta%20Ese%20D%C3%ADa%20(Lyric%20Video).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.getElementById('btn-comenzar').addEventListener('click', function() {
+            // Ocultar pantalla roja
+            document.getElementById('pantalla-inicio').style.opacity = '0';
+            setTimeout(function(){
+                document.getElementById('pantalla-inicio').style.display = 'none';
+                document.getElementById('contenido-principal').style.display = 'block';
+            }, 800);
+
+            // Reproducir música
+            var audio = document.getElementById('musica');
+            if (audio) { audio.play().catch(e => console.log(e)); }
+        });
+
+        // Lluvia de corazones
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-rain');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.opacity = Math.random() * 0.7 + 0.3;
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+</html
