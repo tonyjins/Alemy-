@@ -9,19 +9,18 @@
     </style>
 
     <style>
-        /* --- ESTILOS GENERALES (MODO CLARO POR DEFECTO) --- */
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #fff0f5 0%, #ffdbe6 100%); /* Fondo claro de San Valentín */
+            background: linear-gradient(135deg, #fff0f5 0%, #ffdbe6 100%);
             font-family: 'Nunito', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
-            color: #4a4a4a; /* Texto oscuro */
+            color: #4a4a4a;
             transition: background 0.8s ease, color 0.8s ease;
         }
 
-        /* --- PANTALLA ROJA DE INICIO --- */
+        /* PANTALLA ROJA INICIAL */
         #pantalla-inicio {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -30,7 +29,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 2000;
+            z-index: 3000;
             transition: opacity 0.8s ease-out;
         }
 
@@ -45,12 +44,58 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             font-weight: 800;
             animation: latido 1.5s infinite;
-            transition: transform 0.2s;
-            letter-spacing: 1px;
         }
-        #btn-comenzar:active { transform: scale(0.95); }
 
-        /* --- CONTENIDO PRINCIPAL --- */
+        /* POP-UP DEL MODO ROMÁNTICO */
+        #popup-romantico {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 4000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .popup-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: aparecerSubiendo 0.5s ease-out;
+        }
+
+        .popup-card h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #c2185b;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .btn-activar {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .btn-omitir {
+            background: transparent;
+            color: #888;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* CONTENIDO PRINCIPAL */
         #contenido-principal {
             display: none;
             padding: 20px;
@@ -61,7 +106,7 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.96); /* Fondo claro del contenedor */
+            background: rgba(255, 255, 255, 0.96);
             padding: 40px 25px;
             border-radius: 35px;
             box-shadow: 0 25px 50px -12px rgba(255, 64, 129, 0.35);
@@ -69,247 +114,58 @@
             margin-top: 20px;
             position: relative;
             z-index: 10;
-            animation: aparecerSubiendo 1s ease-out backwards;
-            transition: background 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
         }
 
-        h1 { 
-            color: #c2185b; /* Título rosado oscuro */
-            font-size: 38px; 
-            margin-bottom: 5px;
-            font-family: 'Dancing Script', cursive;
-            text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.15);
-            transition: color 0.8s ease;
-        }
+        h1 { color: #c2185b; font-size: 38px; font-family: 'Dancing Script', cursive; }
+        
+        #contador { display: flex; justify-content: center; gap: 8px; margin: 20px 0 30px 0; width: 100%; }
+        .caja-tiempo { background: #fff; padding: 8px 5px; border-radius: 12px; min-width: 50px; border: 2px solid #ffcdd2; flex: 1; }
+        .numero { font-size: 20px; font-weight: 800; color: #d81b60; display: block; }
+        .etiqueta { font-size: 10px; color: #ef5350; text-transform: uppercase; font-weight: 600; }
 
-        /* --- SEPARADORES ELEGANTES --- */
-        .divisor-elegante {
-            font-family: 'Parisienne', cursive;
-            color: #ff80ab;
-            font-size: 24px;
-            margin: 25px 0;
-            opacity: 0.7;
-            transition: color 0.8s ease, opacity 0.8s ease;
-        }
-
-        /* --- CONTADOR --- */
-        #contador {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 20px 0 30px 0;
-            flex-wrap: nowrap;
-            width: 100%;
-        }
-        .caja-tiempo {
-            background: #fff; /* Fondo blanco para las cajas del contador */
-            padding: 8px 5px;
-            border-radius: 12px;
-            min-width: 50px;
-            border: 2px solid #ffcdd2;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            flex: 1;
-            transition: background 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
-        }
-        .numero {
-            font-size: 20px;
-            font-weight: 800;
-            color: #d81b60; /* Números en rojo San Valentín */
-            display: block;
-            transition: color 0.8s ease;
-        }
-        .etiqueta {
-            font-size: 10px;
-            color: #ef5350; /* Etiquetas en rojo San Valentín */
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-top: 4px;
-            display: block;
-            transition: color 0.8s ease;
-        }
-
-        /* --- GALERÍA --- */
-        .galeria {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px 0;
-        }
-        .foto-marco {
-            width: 135px;
-            height: 135px;
-            border-radius: 22px;
-            border: 5px solid #fff;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-        .foto-marco:hover {
-            transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.3);
-            z-index: 5;
-            border-color: #ffeaef;
-        }
+        .galeria { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 30px 0; }
+        .foto-marco { width: 135px; height: 135px; border-radius: 22px; border: 5px solid #fff; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: all 0.4s ease; }
+        .foto-marco:hover { transform: scale(1.1) rotate(2deg); }
         .foto-marco img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- CARTA --- */
-        .carta-texto { 
-            color: #4a4a4a; 
-            line-height: 1.9; 
-            font-size: 17px; 
-            font-family: 'Nunito', sans-serif;
-            margin-bottom: 25px;
-            text-align: left;
-            padding: 0 10px;
-            transition: color 0.8s ease;
-        }
-        
-        /* --- LISTA --- */
-        .lista-amor {
-            text-align: left;
-            background: #fff5f8; /* Fondo claro para la lista */
-            padding: 25px;
-            border-radius: 20px;
-            margin: 30px 0;
-            border: 2px dashed #ffb6c1;
-            transition: background 0.8s ease, border-color 0.8s ease;
-        }
-        .item-amor {
-            margin-bottom: 12px;
-            font-size: 16px;
-            color: #880e4f; /* Color de texto para la lista */
-            display: flex;
-            align-items: center;
-            font-weight: 600;
-            transition: color 0.8s ease;
-        }
-        .item-amor:before {
-            content: "❤️";
-            margin-right: 12px;
-            font-size: 18px;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
-        }
+        .lista-amor { text-align: left; background: #fff5f8; padding: 25px; border-radius: 20px; margin: 30px 0; border: 2px dashed #ffb6c1; }
+        .item-amor { margin-bottom: 12px; font-size: 16px; color: #880e4f; display: flex; align-items: center; font-weight: 600; }
+        .item-amor:before { content: "❤️"; margin-right: 12px; }
 
-        /* --- PROMESA FINAL --- */
-        .cita-final {
-            margin: 30px 0;
-            font-size: 20px;
-            font-weight: 800;
-            color: #d81b60; /* Color de San Valentín */
-            font-family: 'Nunito', sans-serif;
-            transition: color 0.8s ease;
-        }
+        .theme-switch { position: fixed; top: 20px; right: 20px; z-index: 2000; display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; }
+        .theme-switch input { display: none; }
+        .theme-switch .slider { width: 40px; height: 20px; background-color: #ccc; border-radius: 20px; position: relative; cursor: pointer; }
+        .theme-switch .slider:before { content: ""; position: absolute; width: 16px; height: 16px; border-radius: 50%; background-color: white; top: 2px; left: 2px; transition: 0.4s; }
+        .theme-switch input:checked + .slider { background-color: #ff69b4; }
+        .theme-switch input:checked + .slider:before { transform: translateX(20px); }
 
-        .resaltado { font-family: 'Dancing Script', cursive; color: #d81b60; font-size: 28px; transition: color 0.8s ease; }
-        .corazon-animado {
-            color: #e91e63;
-            font-size: 55px;
-            animation: latido 1.2s infinite;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 5px 5px rgba(233, 30, 99, 0.2));
-            transition: color 0.8s ease, filter 0.8s ease;
-        }
+        /* DARK MODE */
+        body.dark-mode { background: linear-gradient(135deg, #1a1a2e 0%, #0f0b20 100%); color: #e0e0e0; }
+        .dark-mode .container { background: #2a2a4a; border-color: #4a4a6a; }
+        .dark-mode h1, .dark-mode .numero, .dark-mode .item-amor { color: #ff69b4; }
+        .dark-mode .caja-tiempo, .dark-mode .lista-amor { background: #3a3a5a; border-color: #ff69b4; }
 
-        /* --- ANIMACIONES Y EFECTOS --- */
-        @keyframes latido { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+        @keyframes latido { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         @keyframes aparecerSubiendo { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        
         .heart-rain { position: fixed; top: -1vh; z-index: 1; animation: fall linear forwards; }
-        .confeti { position: fixed; width: 12px; height: 12px; z-index: 3000; animation: caidaConfeti 3s ease-out forwards; }
         @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
-        @keyframes caidaConfeti { 0% { transform: translateY(0) rotate(0); opacity:1;} 100% { transform: translateY(100vh) rotate(720deg); opacity:0;} }
-
-        footer { margin-top: 40px; font-size: 12px; color: #ef9a9a; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.8s ease; }
-
-        /* --- MODO OSCURO (DARK MODE) --- */
-        body.dark-mode {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f0b20 100%); /* Fondo oscuro */
-            color: #e0e0e0; /* Texto claro */
-        }
-        .dark-mode .container {
-            background: #2a2a4a; /* Contenedor más oscuro */
-            box-shadow: 0 25px 50px -12px rgba(100, 0, 100, 0.4);
-            border-color: #4a4a6a;
-        }
-        .dark-mode h1 { color: #ff69b4; /* Título rosa fuerte */ text-shadow: 2px 2px 4px rgba(255,105,180,0.2); }
-        .dark-mode .divisor-elegante { color: #ff69b4; opacity: 0.8; }
-        .dark-mode .caja-tiempo {
-            background: #3a3a5a; /* Cajas de contador oscuras */
-            border-color: #5a5a7a;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        .dark-mode .numero { color: #ffccff; /* Números claros */ }
-        .dark-mode .etiqueta { color: #ff99ff; /* Etiquetas claras */ }
-        .dark-mode .foto-marco { border-color: #4a4a6a; background: #3a3a5a; }
-        .dark-mode .foto-marco:hover { box-shadow: 0 15px 35px rgba(255,105,180,0.4); border-color: #ff69b4; }
-        .dark-mode .carta-texto { color: #c0c0c0; }
-        .dark-mode .lista-amor {
-            background: #3a3a5a; /* Lista oscura */
-            border-color: #ff69b4;
-        }
-        .dark-mode .item-amor { color: #ffccff; }
-        .dark-mode .cita-final { color: #ff69b4; }
-        .dark-mode .resaltado { color: #ff69b4; }
-        .dark-mode .corazon-animado { color: #ff69b4; filter: drop-shadow(0 5px 5px rgba(255,105,180,0.3)); }
-        .dark-mode footer { color: #a0a0c0; }
-
-        /* --- TOGGLE DE DARK MODE --- */
-        .theme-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            color: inherit;
-            transition: color 0.8s ease;
-        }
-        .theme-switch input {
-            display: none;
-        }
-        .theme-switch .slider {
-            width: 40px;
-            height: 20px;
-            background-color: #ccc;
-            border-radius: 20px;
-            position: relative;
-            cursor: pointer;
-            transition: background-color 0.4s;
-        }
-        .theme-switch .slider:before {
-            content: "";
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: white;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.4s;
-        }
-        .theme-switch input:checked + .slider {
-            background-color: #ff69b4; /* Rosa San Valentín cuando está activo */
-        }
-        .theme-switch input:checked + .slider:before {
-            transform: translateX(20px);
-        }
     </style>
 </head>
 <body>
 
     <div id="pantalla-inicio">
-        <div class="corazon-animado" style="font-size:70px; color:white; filter:none;">🎁</div>
-        <h1 style="color:white; margin-bottom:40px; font-family:'Nunito'; font-size: 24px; font-weight:bold;">Tienes una sorpresa especial...</h1>
-        <button id="btn-comenzar">❤️ ABRIR AHORA ❤️</button>
+        <div style="font-size:70px; color:white;">🎁</div>
+        <h1 style="color:white; margin-bottom:40px; font-family:'Nunito';">Tienes una sorpresa...</h1>
+        <button id="btn-comenzar">❤️ ABRIR ❤️</button>
+    </div>
+
+    <div id="popup-romantico">
+        <div class="popup-card">
+            <h2>¡Espera, Negrita! ❤️</h2>
+            <p>Para la experiencia completa, activa el Modo Romántico ✨</p>
+            <button class="btn-activar" onclick="activarModoRomantico()">¡Activar ahora!</button><br>
+            <button class="btn-omitir" onclick="cerrarPopup()">No, gracias</button>
+        </div>
     </div>
 
     <div id="contenido-principal">
@@ -320,10 +176,8 @@
         </label>
 
         <div class="container">
-            <div class="corazon-animado">❤️</div>
-            <h1>¡Feliz 14, mi <span class="resaltado">Negrita!</span></h1>
-
-            <p style="font-size:14px; color:#ef5350; margin-top:5px; font-weight:600;">Nuestra historia comenzó el 15 de Dic, 2023</p>
+            <h1>¡Feliz 14, mi <span style="font-family:'Parisienne'">Negrita!</span></h1>
+            <p style="font-size:14px; color:#ef5350; font-weight:600;">Desde el 15 de Dic, 2023</p>
             
             <div id="contador">
                 <div class="caja-tiempo"><span class="numero" id="dias">0</span><span class="etiqueta">Días</span></div>
@@ -331,9 +185,7 @@
                 <div class="caja-tiempo"><span class="numero" id="minutos">0</span><span class="etiqueta">Min</span></div>
                 <div class="caja-tiempo"><span class="numero" id="segundos">0</span><span class="etiqueta">Seg</span></div>
             </div>
-            
-            <div class="divisor-elegante">~ ⚜️ ~</div>
-            
+
             <div class="galeria">
                 <div class="foto-marco"><img src="https://i.postimg.cc/Y2Y7vTmh/1770764914359.png"></div>
                 <div class="foto-marco"><img src="https://i.postimg.cc/dDJk3tzj/IMG-20251220-010032.jpg"></div>
@@ -341,26 +193,19 @@
                 <div class="foto-marco"><img src="https://i.postimg.cc/Fdhk5W90/Screenshot-2026-02-10-22-12-34-849-com-google-android-apps-photos.jpg"></div>
             </div>
 
-            <div class="divisor-elegante">~ ❦ ~</div>
-
             <div class="carta-texto">
                 <b>Alejandra, mi amor:</b><br><br>
-                No tienes idea de lo feliz que me hace ver ese contador avanzar. Cada segundo ahí es un recuerdo juntos, una risa, un beso, y una prueba de que somos el mejor equipo.<br><br>
-                Gracias por ser mi compañera, mi paz y mi locura favorita. Estos años a tu lado han sido los mejores de mi vida y sé que solo es el comienzo.
+                Cada segundo contigo es un regalo. Gracias por ser mi paz y mi locura favorita. ¡Por muchos años más juntos!
             </div>
 
             <div class="lista-amor">
                 <div class="item-amor">Amo tu risa cuando te hago cosquillas</div>
-                <div class="item-amor">Amo tus enojadas (aunque lo niegues)</div>
-                <div class="item-amor">Amo cada una de tus locuras</div>
-                <div class="item-amor">Amo absolutamente todo de ti</div>
+                <div class="item-amor">Amo tus enojadas</div>
+                <div class="item-amor">Amo tus locuras</div>
+                <div class="item-amor">Amo todo de ti</div>
             </div>
-            
-            <div class="cita-final">"Mi lugar favorito en el mundo es a tu lado. Por siempre."</div>
-
-            <div style="font-size: 35px; margin-top:20px; color:#c2185b;">🌹🌹🌹</div>
+            <div style="font-size: 35px; color:#c2185b;">🌹🌹🌹</div>
         </div>
-        <footer>HECHO CON MIS PROPIAS MANOS ❤️</footer>
     </div>
 
     <audio id="musica" loop>
@@ -368,83 +213,51 @@
     </audio>
 
     <script>
-        // --- FECHA DE INICIO: 15 DIC 2023, 8:30 PM ---
         const fechaInicio = new Date("December 15, 2023 20:30:00").getTime();
+        const body = document.body;
+        const darkModeToggle = document.getElementById('darkModeToggle');
 
-        function actualizarContador() {
-            const ahora = new Date().getTime();
-            const diferencia = ahora - fechaInicio;
-            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-            document.getElementById("dias").innerText = dias;
-            document.getElementById("horas").innerText = horas;
-            document.getElementById("minutos").innerText = minutos;
-            document.getElementById("segundos").innerText = segundos;
-        }
-        setInterval(actualizarContador, 1000);
-
-        // --- BOTÓN DE INICIO Y CONFETI ---
+        // Función del primer botón rojo
         document.getElementById('btn-comenzar').addEventListener('click', function() {
-            var audio = document.getElementById('musica');
-            if (audio) { audio.play().catch(e => console.log(e)); }
-            lanzarConfeti();
             document.getElementById('pantalla-inicio').style.opacity = '0';
-            setTimeout(function(){
+            setTimeout(() => {
                 document.getElementById('pantalla-inicio').style.display = 'none';
-                document.getElementById('contenido-principal').style.display = 'block';
+                document.getElementById('popup-romantico').style.display = 'flex';
+                document.getElementById('musica').play();
             }, 800);
         });
 
-        // --- FUNCIÓN DE CONFETI ---
-        function lanzarConfeti() {
-            const colores = ['#ff4081', '#ffd700', '#00e676', '#2979ff', '#ff5252'];
-            for (let i = 0; i < 120; i++) {
-                const confeti = document.createElement('div');
-                confeti.classList.add('confeti');
-                confeti.style.left = Math.random() * 100 + 'vw';
-                confeti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
-                confeti.style.animationDuration = (Math.random() * 2.5 + 2) + 's';
-                document.body.appendChild(confeti);
-                setTimeout(() => confeti.remove(), 4500);
-            }
+        function activarModoRomantico() {
+            body.classList.add('dark-mode');
+            darkModeToggle.checked = true;
+            cerrarPopup();
         }
 
-        // --- LLUVIA DE CORAZONES ---
-        function createHeart() {
+        function cerrarPopup() {
+            document.getElementById('popup-romantico').style.display = 'none';
+            document.getElementById('contenido-principal').style.display = 'block';
+        }
+
+        darkModeToggle.addEventListener('change', () => body.classList.toggle('dark-mode'));
+
+        setInterval(() => {
+            const diferencia = new Date().getTime() - fechaInicio;
+            document.getElementById("dias").innerText = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            document.getElementById("horas").innerText = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutos").innerText = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("segundos").innerText = Math.floor((diferencia % (1000 * 60)) / 1000);
+        }, 1000);
+
+        setInterval(() => {
             const heart = document.createElement('div');
             heart.classList.add('heart-rain');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 22 + 12 + 'px';
-            heart.style.animationDuration = Math.random() * 3 + 3.5 + 's';
-            heart.style.opacity = Math.random() * 0.6 + 0.4;
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
             document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 6500);
-        }
-        setInterval(createHeart, 350);
-
-        // --- TOGGLE DARK MODE (MODO OSCROK) ---
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-
-        darkModeToggle.addEventListener('change', () => {
-            body.classList.toggle('dark-mode');
-            // Guardar la preferencia en el navegador
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        });
-
-        // Cargar la preferencia al iniciar la página
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark-mode');
-            darkModeToggle.checked = true;
-        }
+            setTimeout(() => heart.remove(), 6000);
+        }, 400);
     </script>
-
 </body>
-</html>
+    </html>
+    
