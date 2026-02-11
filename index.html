@@ -62,7 +62,7 @@
             background: white;
             padding: 30px;
             border-radius: 25px;
-            max-width: 300px;
+            max-width: 320px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             animation: aparecerSubiendo 0.5s ease-out;
@@ -139,11 +139,33 @@
         .theme-switch input:checked + .slider { background-color: #ff69b4; }
         .theme-switch input:checked + .slider:before { transform: translateX(20px); }
 
+        /* CARTA EXTENDIDA */
+        .carta-texto { 
+            color: #4a4a4a; 
+            line-height: 1.9; 
+            font-size: 17px; 
+            font-family: 'Nunito', sans-serif;
+            margin-bottom: 25px;
+            text-align: left;
+            padding: 0 15px;
+            white-space: pre-line;
+        }
+
+        .firma {
+            font-family: 'Parisienne', cursive;
+            font-size: 32px;
+            color: #c2185b;
+            text-align: right;
+            margin-top: 20px;
+            padding-right: 20px;
+        }
+
         /* DARK MODE */
         body.dark-mode { background: linear-gradient(135deg, #1a1a2e 0%, #0f0b20 100%); color: #e0e0e0; }
         .dark-mode .container { background: #2a2a4a; border-color: #4a4a6a; }
-        .dark-mode h1, .dark-mode .numero, .dark-mode .item-amor { color: #ff69b4; }
+        .dark-mode h1, .dark-mode .numero, .dark-mode .item-amor, .dark-mode .firma { color: #ff69b4; }
         .dark-mode .caja-tiempo, .dark-mode .lista-amor { background: #3a3a5a; border-color: #ff69b4; }
+        .dark-mode .carta-texto { color: #ccc; }
 
         @keyframes latido { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         @keyframes aparecerSubiendo { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
@@ -194,15 +216,22 @@
             </div>
 
             <div class="carta-texto">
-                <b>Alejandra, mi amor:</b><br><br>
-                Cada segundo contigo es un regalo. Gracias por ser mi paz y mi locura favorita. ¡Por muchos años más juntos!
+                <b>Alejandra, mi Negrita hermosa:</b>
+
+                No tienes idea de lo feliz que me hace ver ese contador avanzar segundo a segundo. Cada número que cambia es un reflejo de todo lo que hemos construido, de cada risa compartida, de cada abrazo que me ha dado paz y de cada momento en el que hemos demostrado ser el mejor equipo.
+
+                Gracias por elegirme cada día, por ser mi refugio en los días grises y mi alegría más grande en los días buenos. Eres mi compañera de vida, mi paz y mi locura favorita. Estos años a tu lado han sido los más maravillosos de mi vida, y sé con todo el corazón que esto es solo el comienzo de nuestra gran historia.
+
+                Te amo por lo que eres, pero sobre todo por quién soy cuando estoy contigo. ¡Feliz San Valentín, mi amor!
             </div>
+            
+            <div class="firma">Anthony</div>
 
             <div class="lista-amor">
                 <div class="item-amor">Amo tu risa cuando te hago cosquillas</div>
-                <div class="item-amor">Amo tus enojadas</div>
-                <div class="item-amor">Amo tus locuras</div>
-                <div class="item-amor">Amo todo de ti</div>
+                <div class="item-amor">Amo tus enojadas (aunque lo niegues)</div>
+                <div class="item-amor">Amo cada una de tus locuras</div>
+                <div class="item-amor">Amo absolutamente todo de ti</div>
             </div>
             <div style="font-size: 35px; color:#c2185b;">🌹🌹🌹</div>
         </div>
@@ -217,7 +246,6 @@
         const body = document.body;
         const darkModeToggle = document.getElementById('darkModeToggle');
 
-        // Función del primer botón rojo
         document.getElementById('btn-comenzar').addEventListener('click', function() {
             document.getElementById('pantalla-inicio').style.opacity = '0';
             setTimeout(() => {
